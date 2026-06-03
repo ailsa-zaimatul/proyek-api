@@ -9,7 +9,7 @@ ssl: {
 rejectUnauthorized: false 
 } 
 }, 
-        define: 
+        define: {
         "timestamps" : false
     }
 });
