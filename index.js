@@ -52,3 +52,5 @@ app.get('/api/laporan/pengembalian', laporanPengembalian);
 app.listen(5000, () => {
     console.log("Server berjalan di http://localhost:5000");
 });
+
+export default app;
