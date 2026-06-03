@@ -17,11 +17,11 @@ const startServer = async () => {
     try {
 
         await db.authenticate();
-        console.log("1. Database Terhubung!");
+        console.log("Database Terhubung!");
 
         await db.sync();
 
-        console.log("2. Semua tabel berhasil disinkronkan");
+        console.log("database synced");
 
     } catch (error) {
 
