@@ -12,8 +12,8 @@ import { authenticateToken } from "../middleware/verify.tokens.js";
 
 const router = express.Router();
 
-router.get("/", authenticateToken, getAllProducts);
-router.post("/", authenticateToken, tambahbukubaru);
+router.get("/",  getAllProducts);
+router.post("/", tambahbukubaru);
 router.delete("/:id", authenticateToken, deleteBuku);
 router.post("/:id", authenticateToken, cariBukuByID);
 router.put("/:id", authenticateToken, updateBuku);
