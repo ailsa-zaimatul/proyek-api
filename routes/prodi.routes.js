@@ -4,8 +4,11 @@ import { authenticateToken } from "../middleware/verify.tokens.js";
 
 const router = express.Router();
 
-router.get("/", authenticateToken, Departement.getAll);
-router.get("/:id", authenticateToken, Departement.findById);
+// PINTU DIBUKA: authenticateToken dihapus khusus untuk GET saja
+router.get("/", Departement.getAll);
+router.get("/:id", Departement.findById);
+
+// TETAP DIKUNCI: Demi keamanan data agar tidak sembarang orang bisa nambah/hapus
 router.post("/", authenticateToken, Departement.add);
 router.patch("/:id", authenticateToken, Departement.update);
 router.delete("/:id", authenticateToken, Departement.destroy);
