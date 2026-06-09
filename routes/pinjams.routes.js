@@ -1,16 +1,24 @@
 import express from "express";
-import Peminjaman from "../controllers/pinjams.controller.js";
+// WAJIB pakai { } dan sesuaikan namanya dengan fungsi di controller
+import { 
+    insertPinjam, 
+    getBukuDipinjam, 
+    kembalikanBuku, 
+    getAllPinjam, 
+    cariPinjamByNim, 
+    getDetailPinjam, 
+    laporanPengembalian 
+} from "../controllers/pinjams.controllers.js"; 
 import { authenticateToken } from "../middleware/verify.tokens.js";
 
 const router = express.Router();
 
-// PINTU DIBUKA: Biar bisa dipamerkan di browser saat demo
-router.get("/", Peminjaman.getAll);
-router.get("/:id", Peminjaman.findById);
-
-// TETAP DIKUNCI: Input, Update, Hapus tetap butuh login
-router.post("/", authenticateToken, Peminjaman.add);
-router.patch("/:id", authenticateToken, Peminjaman.update);
-router.delete("/:id", authenticateToken, Peminjaman.destroy);
+router.get("/", getAllPinjam);
+router.post("/", authenticateToken, insertPinjam);
+router.get("/dipinjam/:nim", getBukuDipinjam);
+router.put("/pengembalian/:id", authenticateToken, kembalikanBuku);
+router.get("/cari/:nim", cariPinjamByNim);
+router.get("/laporan/pengembalian", laporanPengembalian);
+router.get("/:id", getDetailPinjam);
 
 export default router;
