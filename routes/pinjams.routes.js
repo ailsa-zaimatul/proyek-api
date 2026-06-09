@@ -1,24 +1,24 @@
 import express from "express";
-// WAJIB pakai { } dan sesuaikan namanya dengan fungsi di controller
-import { 
-    insertPinjam, 
-    getBukuDipinjam, 
-    kembalikanBuku, 
-    getAllPinjam, 
-    cariPinjamByNim, 
-    getDetailPinjam, 
-    laporanPengembalian 
-} from "../controllers/pinjams.controllers.js"; 
+import {
+  getAllPinjam,
+  insertPinjam,
+  cariPinjamByNim,
+  getDetailPinjam,
+  kembalikanBuku,
+  laporanPengembalian,
+  getBukuDipinjam
+} from "../controllers/pinjams.controllers.js";
+
 import { authenticateToken } from "../middleware/verify.tokens.js";
 
 const router = express.Router();
 
-router.get("/", getAllPinjam);
 router.post("/", authenticateToken, insertPinjam);
-router.get("/dipinjam/:nim", getBukuDipinjam);
+router.get("/", authenticateToken, getAllPinjam);
+router.get("/nim/:nim", authenticateToken, cariPinjamByNim);
+router.get("/pengembalian/:nim", authenticateToken, getBukuDipinjam);
 router.put("/pengembalian/:id", authenticateToken, kembalikanBuku);
-router.get("/cari/:nim", cariPinjamByNim);
-router.get("/laporan/pengembalian", laporanPengembalian);
-router.get("/:id", getDetailPinjam);
+router.get("/laporan/pengembalian", authenticateToken, laporanPengembalian);
+router.get("/:id", authenticateToken, getDetailPinjam);
 
 export default router;
